@@ -1,0 +1,90 @@
+mutation SeedDatabase @transaction @auth(level: USER, insecureReason: "This mutation is intended for seeding the database with example data and is safe for authenticated users.") {
+  user_upsertMany(data: [
+    {
+      id: "b45501d5-b6d8-4f81-a9f8-8a2b5e2d1d0c",
+      displayName: "Alice Smith",
+      email: "alice.smith@example.com",
+      createdAt: "2023-01-01T10:00:00Z",
+      photoUrl: "https://example.com/alice.jpg"
+    },
+    {
+      id: "a2b8e3f9-c7d6-4a12-8e01-1b2c3d4e5f6a",
+      displayName: "Bob Johnson",
+      email: "bob.johnson@example.com",
+      createdAt: "2023-01-02T11:30:00Z",
+      photoUrl: "https://example.com/bob.jpg"
+    }
+  ])
+  bikeModel_upsertMany(data: [
+    {
+      id: "d9e7f6a3-b2c1-4e8f-9a0b-1c2d3e4f5a6b",
+      name: "Roadster 3000",
+      brand: "Speedster Bikes",
+      year: 2022,
+      type: "Road",
+      description: "Lightweight and fast, perfect for competitive cycling.",
+      imageUrl: "https://example.com/roadster3000.jpg",
+      createdAt: "2023-01-01T09:00:00Z"
+    },
+    {
+      id: "f8c9d0e1-a2b3-4f56-7g8h-9i0j1k2l3m4n",
+      name: "Mountain King Pro",
+      brand: "Trailblazer Cycles",
+      year: 2023,
+      type: "Mountain",
+      description: "Robust and capable, designed for challenging trails.",
+      imageUrl: "https://example.com/mountainkingpro.jpg",
+      createdAt: "2023-01-02T10:15:00Z"
+    }
+  ])
+  userBike_upsertMany(data: [
+    {
+      id: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      userId: "b45501d5-b6d8-4f81-a9f8-8a2b5e2d1d0c",
+      bikeModelId: "d9e7f6a3-b2c1-4e8f-9a0b-1c2d3e4f5a6b",
+      ownershipStatus: "Owned",
+      purchaseDate: "2023-01-15",
+      purchasePrice: 1500.00,
+      createdAt: "2023-01-15T14:00:00Z"
+    },
+    {
+      id: "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      userId: "a2b8e3f9-c7d6-4a12-8e01-1b2c3d4e5f6a",
+      bikeModelId: "f8c9d0e1-a2b3-4f56-7g8h-9i0j1k2l3m4n",
+      ownershipStatus: "Owned",
+      purchaseDate: "2023-02-01",
+      purchasePrice: 2200.50,
+      createdAt: "2023-02-01T16:00:00Z"
+    }
+  ])
+  bikeList_upsertMany(data: [
+    {
+      id: "c7d6e5f4-a3b2-1c2d-3e4f-5a6b7c8d9e0f",
+      userId: "b45501d5-b6d8-4f81-a9f8-8a2b5e2d1d0c",
+      name: "My Dream Road Bikes",
+      public: true,
+      description: "A selection of my favorite road bikes.",
+      createdAt: "2023-03-01T08:00:00Z",
+      updatedAt: "2023-03-01T08:00:00Z"
+    }
+  ])
+  bikeListItem_upsertMany(data: [
+    {
+      bikeListId: "c7d6e5f4-a3b2-1c2d-3e4f-5a6b7c8d9e0f",
+      bikeModelId: "d9e7f6a3-b2c1-4e8f-9a0b-1c2d3e4f5a6b",
+      position: 1,
+      note: "My primary road bike for long rides."
+    }
+  ])
+  maintenanceRecord_upsertMany(data: [
+    {
+      id: "e0f1g2h3-i4j5-k6l7-m8n9-o0p1q2r3s4t5",
+      userBikeId: "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      maintenanceDate: "2023-04-01",
+      serviceType: "Tune-up",
+      notes: "General check-up and chain lubrication.",
+      cost: 50.00,
+      createdAt: "2023-04-01T09:00:00Z"
+    }
+  ])
+}

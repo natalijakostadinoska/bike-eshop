@@ -1,0 +1,48 @@
+query ListAllBikeModels @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public as it retrieves general bike model information.") {
+  bikeModels {
+    id
+    name
+    brand
+    year
+    type
+    imageUrl
+  }
+}
+
+query GetMyBikeLists @auth(level: USER) {
+  bikeLists(where: {userId: {eq_expr: "auth.uid"}}) {
+    id
+    name
+    public
+    description
+    createdAt
+    updatedAt
+    bikeListItems {
+      position
+      note
+      bikeModel {
+        name
+        brand
+      }
+    }
+  }
+}
+
+mutation CreateNewUserBike($bikeModelId: UUID!, $ownershipStatus: String!, $purchaseDate: Date, $purchasePrice: Float) @auth(level: USER) {
+  userBike_insert(data: {
+    userId_expr: "auth.uid",
+    bikeModelId: $bikeModelId,
+    ownershipStatus: $ownershipStatus,
+    purchaseDate: $purchaseDate,
+    purchasePrice: $purchasePrice
+  })
+}
+
+mutation UpdateMaintenanceRecord($id: UUID!, $maintenanceDate: Date, $serviceType: String, $notes: String, $cost: Float) @auth(expr: "exists(request.resource) && request.resource.userBike.user.id == auth.uid") {
+  maintenanceRecord_update(key: {id: $id}, data: {
+    maintenanceDate: $maintenanceDate,
+    serviceType: $serviceType,
+    notes: $notes,
+    cost: $cost
+  })
+}
