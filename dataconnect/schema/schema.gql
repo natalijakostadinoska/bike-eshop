@@ -1,0 +1,50 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  photoUrl: String
+}
+
+type BikeModel @table {
+  name: String!
+  brand: String!
+  year: Int!
+  createdAt: Timestamp!
+  type: String
+  description: String
+  imageUrl: String
+}
+
+type UserBike @table {
+  user: User!
+  bikeModel: BikeModel!
+  ownershipStatus: String!
+  createdAt: Timestamp!
+  purchaseDate: Date
+  purchasePrice: Float
+}
+
+type MaintenanceRecord @table {
+  userBike: UserBike!
+  maintenanceDate: Date!
+  serviceType: String!
+  createdAt: Timestamp!
+  notes: String
+  cost: Float
+}
+
+type BikeList @table {
+  user: User!
+  name: String!
+  public: Boolean!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  description: String
+}
+
+type BikeListItem @table(key: ["bikeList", "bikeModel"]) {
+  bikeList: BikeList!
+  bikeModel: BikeModel!
+  position: Int!
+  note: String
+}
