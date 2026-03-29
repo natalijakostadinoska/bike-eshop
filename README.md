@@ -31,15 +31,6 @@
 
 ---
 
-## 📸 Preview
-
-<p align="center">
-  <img src="https://via.placeholder.com/200x400?text=Home+Screen" width="23%" />
-  <img src="https://via.placeholder.com/200x400?text=Product+Details" width="23%" />
-  <img src="https://via.placeholder.com/200x400?text=Cart+View" width="23%" />
-  <img src="https://via.placeholder.com/200x400?text=Checkout" width="23%" />
-</p>
-
 ---
 
 ## 🚀 Getting Started
